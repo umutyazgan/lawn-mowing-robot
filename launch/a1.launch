@@ -1,0 +1,33 @@
+
+<launch>
+
+  <!-- start the simulator with lawn world and turtlebot -->
+
+  <include file="$(find turtlebot_gazebo)/launch/turtlebot_world.launch" >
+    <arg name="world_file" value="$(find lawn_mowing_robot)/worlds/lawn.world"/>
+  </include>
+  
+  <!-- start the gmapping module -->
+  
+  <include file="$(find turtlebot_navigation)/launch/includes/gmapping.launch.xml"/>
+  
+  <!-- Keep advanced navigation off while doing mapping -->
+  <!-- <include file="$(find turtlebot_navigation)/launch/includes/amcl.launch.xml">
+    <arg name="initial_pose_x" value="0.0"/>
+    <arg name="initial_pose_y" value="0.0"/>
+    <arg name="initial_pose_a" value="0.0"/>
+  </include> -->
+
+  <!-- Keep motion planning off while doing mapping-->
+  
+  <!--<include file="$(find turtlebot_navigation)/launch/includes/move_base.launch.xml"/> -->
+  
+  <!-- start some nice visualisations from the robot's perspective -->
+  
+  <include file="$(find turtlebot_rviz_launchers)/launch/view_navigation.launch"/>
+  
+  <node pkg="lawn_mowing_robot" type="lawn_map_publisher" name="lawn_map_publisher"  output="screen">  </node>
+  <node pkg="lawn_mowing_robot" type="lawn_explorer.py" name="lawn_explorer"  output="screen">
+  </node>
+  
+</launch>
