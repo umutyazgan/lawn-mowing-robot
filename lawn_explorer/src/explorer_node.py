@@ -52,19 +52,18 @@ def laser_callback(data):
                     return 0  # blocked from right
         return -1  # not blocked
 
-    motor_command.linear.x = 10  # keep going
-    #if blocked() == 1:  # if blocked from left
-    #    motor_command.linear.x = 0     # stop and
-    #    motor_command.angular.z= -0.3  # turn right
-    #    motor_command_publisher.publish(motor_command)
-    #elif blocked() == 0:  # if blocked from right
-    #    motor_command.linear.x = 0    # stop and
-    #    motor_command.angular.z= 0.3  # turn left
-    #    motor_command_publisher.publish(motor_command)
-    #else:  # if not blocked
-    #    motor_command.linear.x = 10  # keep going
-    #    motor_command.angular.z= 0    # straight
-    #    motor_command_publisher.publish(motor_command)
+    if blocked() == 1:  # if blocked from left
+        motor_command.linear.x = 0     # stop and
+        motor_command.angular.z= -0.3  # turn right
+        motor_command_publisher.publish(motor_command)
+    elif blocked() == 0:  # if blocked from right
+        motor_command.linear.x = 0    # stop and
+        motor_command.angular.z= 0.3  # turn left
+        motor_command_publisher.publish(motor_command)
+    else:  # if not blocked
+        motor_command.linear.x = 0.3  # keep going
+        motor_command.angular.z= 0    # straight
+        motor_command_publisher.publish(motor_command)
 
     ## Tried a trigonametric approach. It didn't work.
     ## I used laws of Sines and Cosines on triangles to calculate how
@@ -94,17 +93,17 @@ def laser_callback(data):
     ## Alternatively we could have looked at the laser scan BEFORE we made this decision
     ## Well Lets see how we might use a laser scan
     ## Laser scan is an array of distances
-    #print 'Number of points in laser scan is: ', len(data.ranges)
-    #print 'The distance to the rightmost scanned point is: ', data.ranges[0]
-    #print 'The distance to the leftmost scanned point is: ', data.ranges[-1]
-    #print 'The distance to the middle scanned point is: ', data.ranges[len(data.ranges)/2]
+    print 'Number of points in laser scan is: ', len(data.ranges)
+    print 'The distance to the rightmost scanned point is: ', data.ranges[0]
+    print 'The distance to the leftmost scanned point is: ', data.ranges[-1]
+    print 'The distance to the middle scanned point is: ', data.ranges[len(data.ranges)/2]
     ## You can use basic trigonometry with the above scan array and the following information to find out exactly where the laser scan found something
-    #print 'The minimum angle scanned by the laser is: ', data.angle_min
-    #print 'The maximum angle scanned by the laser is: ', data.angle_max
-    #print 'The increment in the angles scanned by the laser is: ', data.angle_increment
+    print 'The minimum angle scanned by the laser is: ', data.angle_min
+    print 'The maximum angle scanned by the laser is: ', data.angle_max
+    print 'The increment in the angles scanned by the laser is: ', data.angle_increment
     ## angle_max = angle_min+angle_increment*len(data.ranges)
-    #print 'The minimum range (distance) the laser can perceive is: ', data.range_min
-    #print 'The maximum range (distance) the laser can perceive is: ', data.range_max
+    print 'The minimum range (distance) the laser can perceive is: ', data.range_min
+    print 'The maximum range (distance) the laser can perceive is: ', data.range_max
     
 ## You can also make use of the map which is being built by the "gslam_mapping" subsystem
 ## There is some code here to help but you can understand the API also by looking up the OccupancyGrid message and its members (this is the API for the message)

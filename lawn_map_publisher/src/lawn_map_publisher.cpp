@@ -1,9 +1,3 @@
-/*
- * referee_node_a1_456.cpp
- *
- * BLG456E Assignment 1 referee
- *
- */
 #include "ros/ros.h"
 #include "nav_msgs/OccupancyGrid.h"
 #include "gazebo_msgs/GetModelState.h"
@@ -50,7 +44,7 @@ int main(int argc, char **argv)
 
     int return_status=0;
 
-    ros::init(argc, argv, "referee_node");
+    ros::init(argc, argv, "lawn_map_publisher");
     std::string run_id,run_no;
 
 //     tf::TransformListener listener(ros::Duration(10.0));
@@ -177,23 +171,23 @@ int main(int argc, char **argv)
 
 //         std::cout<<"Time elapsed (s): "<<elapsed.toSec()<<" Discovered Area: "<<discoveredArea<<" Unknown Area: "<<unknownArea<<" Occupied Area: "<<occupiedArea<<std::endl;
         if(counter%20==0){
-            //std::cout<<"Ground truth pose: "<<ground_truth_pose.matrix()<<std::endl;
-            //std::cout<<std::endl;
-            //std::cout<<"# uncovered squares: "<<uncovered_grid_squares<<std::endl;
-            //std::cout<<std::endl;
-            //std::cout<<std::endl;
+            std::cout<<"Ground truth pose: "<<ground_truth_pose.matrix()<<std::endl;
+            std::cout<<std::endl;
+            std::cout<<"# uncovered squares: "<<uncovered_grid_squares<<std::endl;
+            std::cout<<std::endl;
+            std::cout<<std::endl;
         }
 
         if(walltime-startwalltime>ros::WallDuration(40.0*60)) {
-            //std::cout<<resultstring.str()<<std::endl;
-            //std::cout<<"This is taking too long in the real world"<<std::endl;
-            //results<<resultstring.str()<<",This took forever (>40 min) so I gave up."<<std::endl;
+            std::cout<<resultstring.str()<<std::endl;
+            std::cout<<"This is taking too long in the real world"<<std::endl;
+            results<<resultstring.str()<<",This took forever (>40 min) so I gave up."<<std::endl;
             break;
         }
         else {
             distance_travelled=(ground_truth_pose.translation()-prev_ground_truth_pose.translation()).norm();
             if(distance_travelled>50.0) {
-                //std::cout<<"Robot flew away."<<std::endl;
+                std::cout<<"Robot flew away."<<std::endl;
                 results<<resultstring.str()<<",Robot flew away."<<std::endl;
                 return_status=1;
                 break;
@@ -207,8 +201,8 @@ int main(int argc, char **argv)
             }
             else if(num_snapshotted>=num_times_to_snapshot && close_when_finished_snapshots) {
                 results<<resultstring.str()<<",Finished run."<<std::endl;
-                //std::cout<<"Finished run with "<<elapsed.toSec()<<" seconds elapsed"<<std::endl;
-                //std::cout<<"Waiting 10 seconds to close referee - waiting or cleaup."<<std::endl;
+                std::cout<<"Finished run with "<<elapsed.toSec()<<" seconds elapsed"<<std::endl;
+                std::cout<<"Waiting 10 seconds to close referee - waiting or cleaup."<<std::endl;
                 usleep(10000000);
                 break;
             }

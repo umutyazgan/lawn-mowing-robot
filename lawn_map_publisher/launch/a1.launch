@@ -1,10 +1,10 @@
 
 <launch>
 
-  <!-- start the simulator with lawn world and turtlebot -->
+  <!-- start the simulator with some objects and turtlebot -->
 
   <include file="$(find turtlebot_gazebo)/launch/turtlebot_world.launch" >
-    <arg name="world_file" value="$(find lawn_mowing_robot)/worlds/lawn.world"/>
+    <arg name="world_file" value="$(find lawn_map_publisher)/worlds/lawn.world"/>
   </include>
   
   <!-- start the gmapping module -->
@@ -26,8 +26,14 @@
   
   <include file="$(find turtlebot_rviz_launchers)/launch/view_navigation.launch"/>
   
-  <node pkg="lawn_mowing_robot" type="lawn_map_publisher" name="lawn_map_publisher"  output="screen">  </node>
-  <node pkg="lawn_mowing_robot" type="lawn_explorer.py" name="lawn_explorer"  output="screen">
+  
+  
+  <!-- the referee node -->
+  
+  <node pkg="lawn_map_publisher" type="lawn_map_publisher" name="lawn_map_publisher" output="screen">
   </node>
+  
+  <!-- <node pkg="lawn_explorer" type="explorer_node" name="explorer_node"  output="screen">
+  </node> -->
   
 </launch>
