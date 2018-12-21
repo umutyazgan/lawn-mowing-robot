@@ -1,39 +1,31 @@
-
 <launch>
-
-  <!-- start the simulator with some objects and turtlebot -->
-
+  <!-- start the simulator with lawn world and turtlebot -->
   <include file="$(find turtlebot_gazebo)/launch/turtlebot_world.launch" >
     <arg name="world_file" value="$(find lawn_map_publisher)/worlds/lawn.world"/>
   </include>
   
-  <!-- start the gmapping module -->
-  
+  <!-- start the gmapping -->
   <include file="$(find turtlebot_navigation)/launch/includes/gmapping.launch.xml"/>
-  
-  <!-- Keep advanced navigation off while doing mapping -->
-  <!-- <include file="$(find turtlebot_navigation)/launch/includes/amcl.launch.xml">
+
+<!-- <include file="$(find turtlebot_navigation)/launch/includes/amcl.launch.xml">
     <arg name="initial_pose_x" value="0.0"/>
     <arg name="initial_pose_y" value="0.0"/>
     <arg name="initial_pose_a" value="0.0"/>
-  </include> -->
-
-  <!-- Keep motion planning off while doing mapping-->
-  
-  <!--<include file="$(find turtlebot_navigation)/launch/includes/move_base.launch.xml"/> -->
-  
-  <!-- start some nice visualisations from the robot's perspective -->
-  
+  </include>-->
+  <!--   <include file="$(find turtlebot_navigation)/launch/includes/move_base.launch.xml"/>-->
+  <!-- start rviz -->
   <include file="$(find turtlebot_rviz_launchers)/launch/view_navigation.launch"/>
-  
-  
-  
-  <!-- the referee node -->
-  
+
+  <!-- turtlebot_teleop_key already has its own built in velocity smoother -->
+  <!--<node pkg="turtlebot_teleop" type="turtlebot_teleop_key" name="turtlebot_teleop_keyboard"  output="screen">
+    <param name="scale_linear" value="0.5" type="double"/>
+    <param name="scale_angular" value="1.5" type="double"/>
+    <remap from="turtlebot_teleop_keyboard/cmd_vel" to="cmd_vel_mux/input/teleop"/>
+  </node>-->
+  <!-- the map publisher node
   <node pkg="lawn_map_publisher" type="lawn_map_publisher" name="lawn_map_publisher" output="screen">
-  </node>
+  </node>-->
   
   <!-- <node pkg="lawn_explorer" type="explorer_node" name="explorer_node"  output="screen">
   </node> -->
-  
 </launch>

@@ -1,40 +1,15 @@
 #!/usr/bin/env python
-## AK
-## explorer_node_py.py
-##
-## BLG456E Assignment 1 skeleton
-##
-## Instructions: Change the laser_callback function to make the robot explore more
-## intelligently, using its sensory data (the laser range array).
-##
-## Advanced: If you want to make use of the robot's mapping subsystem then you can
-## make use of the map in the mapping_callback function.
-##
-## 
 
-## Common ROS headers.
+
 import rospy
-## Required for some printing options
 import sys
-## Required for trigonametry and sqrt functions
 import math
-
-## This is needed for the data structure containing the motor command.
 from geometry_msgs.msg import Twist
-## This is needed for the data structure containing the laser scan
 from sensor_msgs.msg import LaserScan
-## This is needed for the data structure containing the map (which you may not use).
 from nav_msgs.msg import OccupancyGrid
 
-## The following function is a "callback" function that is called back whenever a new laser scan is available.
-## That is, this function will be called for every new laser scan.
-##
-## --------------------------------------------------------------------------------
-## ----------CHANGE THIS FUNCTION TO MAKE THE ROBOT EXPLORE INTELLIGENTLY----------
-## --------------------------------------------------------------------------------
-##
+
 def laser_callback(data):
-    ## Lets fill a twist message for motor command
     motor_command = Twist()
     mid_laser = len(data.ranges)/2
 
@@ -109,7 +84,7 @@ def laser_callback(data):
 ## There is some code here to help but you can understand the API also by looking up the OccupancyGrid message and its members (this is the API for the message)
 ## If you want me to explain the data structure, I will - just ask me in advance of class
 def map_callback(data):
-    chatty_map = False
+    chatty_map = True
     if chatty_map:
         print "-------MAP---------"
         ## Here x and y has been incremented with five to make it fit in the terminal
@@ -137,14 +112,8 @@ def explorer_node():
     ## Here we declare that we are going to publish "Twist" messages to the topic /cmd_vel_mux/navi. It is defined as global because we are going to use this publisher in the laser_callback.
     global motor_command_publisher
     motor_command_publisher = rospy.Publisher('/cmd_vel_mux/input/navi', Twist, queue_size = 10)
-    
-    ## Here we set the function laser_callback to recieve new laser messages when they arrive
     rospy.Subscriber("/scan", LaserScan, laser_callback, queue_size = 1000)
-    
-    ## Here we set the function map_callback to recieve new map messages when they arrive from the mapping subsystem
     rospy.Subscriber("/map", OccupancyGrid, map_callback, queue_size = 1000)
-    
-    ## spin is an infinite loop but it lets callbacks to be called when a new data available. That means spin keeps this node not terminated and run the callback when nessessary. 
     rospy.spin()
     
 if __name__ == '__main__':

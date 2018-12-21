@@ -22,10 +22,10 @@
 //publishing rate
 #define DEFAULT_MAP_PUB_FREQ "1" 
 
-#define MAP_OFFSET_X -35
-#define MAP_OFFSET_Y -35
-#define MAP_LEN_X 65.1
-#define MAP_LEN_Y 65.1
+#define MAP_OFFSET_X 0
+#define MAP_OFFSET_Y 0
+#define MAP_LEN_X 20
+#define MAP_LEN_Y 20
 //map resolution (m/cell)
 #define MAP_RESOLUTION 0.1
 
