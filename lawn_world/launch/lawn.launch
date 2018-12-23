@@ -1,17 +1,17 @@
 <launch>
   <!-- start the simulator with lawn world and turtlebot -->
   <include file="$(find turtlebot_gazebo)/launch/turtlebot_world.launch" >
-    <arg name="world_file" value="$(find lawn_map_publisher)/worlds/dunyam.world"/>
+    <arg name="world_file" value="$(find lawn_world)/worlds/dunyam.world"/>
   </include>
   
   <!--start the gmapping-->
   <!--<include file="$(find turtlebot_navigation)/launch/includes/gmapping.launch.xml"/>-->
- <arg name="map_file" default="$(env TURTLEBOT_MAP_FILE)"/>
- <node name="map_server" pkg="map_server" type="map_server" args="$(arg map_file)"/>
- <include file="$(find turtlebot_navigation)/launch/includes/amcl.launch.xml">
-    <arg name="initial_pose_x" value="0.0"/>
+  <arg name="map_file" default="$(env TURTLEBOT_MAP_FILE)"/>
+  <node name="map_server" pkg="map_server" type="map_server" args="$(find lawn_world)/maps/maporhan.yaml"/>
+  <include file="$(find turtlebot_navigation)/launch/includes/amcl.launch.xml">
+    <!--<arg name="initial_pose_x" value="0.0"/>
     <arg name="initial_pose_y" value="0.0"/>
-    <arg name="initial_pose_a" value="0.0"/>
+    <arg name="initial_pose_a" value="0.0"/>-->
   </include>
   <include file="$(find turtlebot_navigation)/launch/includes/move_base.launch.xml"/>
   <!-- start rviz -->
@@ -22,9 +22,6 @@
     <param name="scale_linear" value="0.5" type="double"/>
     <param name="scale_angular" value="1.5" type="double"/>
     <remap from="turtlebot_teleop_keyboard/cmd_vel" to="cmd_vel_mux/input/teleop"/>
-  </node>-->
-  <!-- the map publisher node
-  <node pkg="lawn_map_publisher" type="lawn_map_publisher" name="lawn_map_publisher" output="screen">
   </node>-->
   
   <!-- <node pkg="lawn_explorer" type="explorer_node" name="explorer_node"  output="screen">

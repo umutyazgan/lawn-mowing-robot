@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 2.8.3)
-project(lawn_map_publisher)
+project(lawn_world)
 
 ## Find catkin macros and libraries
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
@@ -116,8 +116,8 @@ find_package(gazebo REQUIRED)
 #  DEPENDS system_lib
 # )
 catkin_package(
-  INCLUDE_DIRS include
-  LIBRARIES gazebo_map_publisher
+#   INCLUDE_DIRS include
+#   LIBRARIES gazebo_map_publisher
   CATKIN_DEPENDS geometry_msgs roscpp std_msgs nav_msgs gazebo_ros eigen_conversions
   DEPENDS gazebo
 )
@@ -147,28 +147,23 @@ include_directories(
 ## Add cmake target dependencies of the library
 ## as an example, code may need to be generated before libraries
 ## either from message generation or dynamic reconfigure
-# add_dependencies(a1_skeleton_456 ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 ## Declare a C++ executable
-# add_executable(a1_skeleton_456_node src/a1_skeleton_456_node.cpp)
-add_executable(lawn_map_publisher src/lawn_map_publisher.cpp)
+# add_executable(lawn_map_publisher src/lawn_map_publisher.cpp)
 # add_executable(test src/test.cpp)
 
-add_library(gazebo_map_publisher
-   src/GazeboMapPublisher.cpp
-)
+# add_library(gazebo_map_publisher
+#    src/GazeboMapPublisher.cpp
+# )
 
 
-add_dependencies(gazebo_map_publisher ${catkin_EXPORTED_TARGETS})
+# add_dependencies(gazebo_map_publisher ${catkin_EXPORTED_TARGETS})
 
 ## Add cmake target dependencies of the executable
 ## same as for the library above
 # add_dependencies(a1_skeleton_456_node ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 
 ## Specify libraries to link a library or executable target against
-# target_link_libraries(a1_skeleton_456_node
-#   ${catkin_LIBRARIES}
-# )
-target_link_libraries(lawn_map_publisher ${catkin_LIBRARIES})
+# target_link_libraries(lawn_map_publisher ${catkin_LIBRARIES})
 
 #############
 ## Install ##
