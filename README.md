@@ -37,7 +37,7 @@ $ cd ~/catkin_ws
 $ catkin_make
 ```
 
-Replace ~/catkin_ws with path to your Catkin workspace.
+Replace `~/catkin_ws` with path to your Catkin workspace.
 
 ## Running Simulation
 
@@ -61,9 +61,9 @@ $ rosrun lawn_explorer go_to_goals.py
 
 ## Authors
 
-Umut Yazgan (https://github.com/umutyazgan)
-Orhan Kurto (https://github.com/kurtorhan)
-İbrahim Karahan (https://github.com/ibrahimkarahan47)
+* Umut Yazgan (https://github.com/umutyazgan)
+* Orhan Kurto (https://github.com/kurtorhan)
+* İbrahim Karahan (https://github.com/ibrahimkarahan47)
 
 ## License
 
