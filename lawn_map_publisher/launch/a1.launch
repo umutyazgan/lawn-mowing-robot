@@ -1,10 +1,10 @@
 <launch>
   <!-- start the simulator with lawn world and turtlebot -->
   <include file="$(find turtlebot_gazebo)/launch/turtlebot_world.launch" >
-    <arg name="world_file" value="$(find lawn_map_publisher)/worlds/lawn.world"/>
+    <arg name="world_file" value="$(find lawn_map_publisher)/worlds/dunyam.world"/>
   </include>
   
-  <!-- start the gmapping -->
+  <!--start the gmapping-->
   <!--<include file="$(find turtlebot_navigation)/launch/includes/gmapping.launch.xml"/>-->
  <arg name="map_file" default="$(env TURTLEBOT_MAP_FILE)"/>
  <node name="map_server" pkg="map_server" type="map_server" args="$(arg map_file)"/>
