@@ -30,7 +30,7 @@ def hello():
  
     if form.validate():
         flash("coordinates:" + x + "," + y)
-        coordinates = [int(x),int(y)]
+        coordinates = [float(x),float(y)]
         pub_coords = Float32MultiArray(data=coordinates)
         rospy.loginfo(pub_coords)
         pub.publish(pub_coords)
